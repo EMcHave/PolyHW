@@ -21,11 +21,8 @@ struct Answer
 
 
 /* 2nd HW */
-<<<<<<< HEAD
+
 Answer firstVar(const char* path);
-=======
-Answer firstVar(const std::vector<Point>& input);
->>>>>>> e8bc553fb87dcd7ebd3135bf6c8a8e45ac39a245
 Answer secondVar(const char* path);
 //std::vector<Point> readFile(const char* path);
 
