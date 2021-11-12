@@ -18,7 +18,7 @@ Answer secondVar( const char* path)
 
     while (in >> x >> y)
     {
-        int dist = x * cos + y * sin;
+        int dist = x * cos + y * (- sin);
 
         if (dist >= maxRight)
         {
