@@ -57,7 +57,7 @@ void BallisticMovement::solution()
     {
 
         if (flyRight) {
-            for (int i = wallHit + 1; i < walls.size() - 1; i++)
+            for (int i = wallHit + 1; i < walls.size(); i++)
                 if (!collided)
                     flight(i);
         }
