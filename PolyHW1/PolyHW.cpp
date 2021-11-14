@@ -5,7 +5,6 @@ using namespace std;
 
 int main()
 {
-
     //vector<Point> points = readFile("in.txt");
     Answer res = secondVar("in.txt");
 

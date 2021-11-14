@@ -5,16 +5,6 @@
 #include <exception>
 #include <vector>
 
-struct Point{
-    int x;
-    int y;
-};
-
-struct Answer
-{
-    Point left;
-    Point right;        
-};
 
 struct Wall
 {
@@ -22,13 +12,6 @@ struct Wall
     double h;
 };
 
-struct System
-{
-    double startHeight;
-    Wall* walls;
-    double vx;
-    double vy;
-};
 /* 3rd HW*/
 class BallisticMovement {
 private:
@@ -59,13 +42,3 @@ public:
     void printAreaOfLanding();
     ~BallisticMovement();
 };
-
-/* 2nd HW */
-Answer firstVar(Point* input, int n);
-Answer secondVar(Point* in, int n);
-Point* readFile(char* path, int& n);
-
-/*  1st HW */
-int factorial(int);
-int C_n_k(int, int);
-double** funcValue(double x0, double xmax, double st, int& size, double (*fnc)(double));
