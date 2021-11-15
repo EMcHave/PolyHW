@@ -6,7 +6,7 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-    if (true)
+    if (argc == 2)
     {
         /*
         using std::chrono::high_resolution_clock;
@@ -15,7 +15,7 @@ int main(int argc, char** argv)
         using std::chrono::milliseconds;
         */
         //auto t1 = high_resolution_clock::now();
-        BallisticMovement solution("in.txt");
+        BallisticMovement solution(argv[1]);
         //unique_ptr<BallisticMovement> solution(new BallisticMovement("in.txt"));
         //auto t2 = high_resolution_clock::now();
 

@@ -29,7 +29,7 @@ private:
     int n;
     double pointOfLanding;
 
-    void readFile(char*);
+    void readFile(const char*);
     static double* roots(double, double, double, double);
     double flyPath(double x);
     void checkCollision(int i);
@@ -38,7 +38,7 @@ private:
     void solution();
 
 public:
-    BallisticMovement(char*);
+    BallisticMovement(const char*);
     void printAreaOfLanding();
     ~BallisticMovement();
 };

@@ -1,15 +1,15 @@
 #include "HWfunctions.h"
-
+#include <string>
 ////////////////////// 3RD HW ///////////////////////
 
-BallisticMovement::BallisticMovement(char* inputFile)
+BallisticMovement::BallisticMovement(const char* inputFile)
     :wallHit(0), flyRight(true), isLanded(false), collided(false)
 {
     readFile(inputFile);
     solution();
 }
 
-void BallisticMovement::readFile(char* path)
+void BallisticMovement::readFile(const char* path)
 {
     std::ifstream in(path);
     in >> h;
@@ -98,9 +98,10 @@ void BallisticMovement::printAreaOfLanding()
     for (int i = 0; i < walls.size() - 1; i++)
         if (pointOfLanding > walls[i].x && pointOfLanding < walls[i + 1].x)
         {
-            std::cout << i << std::endl;
+            std::cout << std::to_string(i) << std::endl;
         }
-    if (pointOfLanding > walls.at(walls.size()-1).x) std::cout << walls.size() - 1 << std::endl;
+    if (pointOfLanding > walls.at(walls.size() - 1).x)
+        std::cout << std::to_string(walls.size() - 1) << std::endl;
 }
 
 BallisticMovement::~BallisticMovement() {}
