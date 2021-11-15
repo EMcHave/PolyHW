@@ -15,7 +15,7 @@ void BallisticMovement::readFile(const char* path)
     in >> h;
     in >> vx >> vy;
 
-    walls.push_back(Wall{ 0, h });
+    walls.push_back(Wall{ 0, 0 });
     while (!in.eof())
     {
         Wall inWall;
@@ -66,17 +66,15 @@ void BallisticMovement::solution()
 void BallisticMovement::checkCollision(int i)
 {
     double temp = flyPath(walls[i].x);
-    //std::cout << temp << std::endl;
     if (temp < walls[i].h && temp > 0)
     {
         collided = true;
         flyRight = !flyRight;
         h = temp;
-        //std::cout << walls[i].x - walls[wallHit].x << std::endl;
         vy = vy - g * (walls[i].x - walls[wallHit].x) / vx;
         vx = -vx;
         wallHit = i;
-        //std::cout << wallHit <<' ' << vx << ' ' << vy << ' ' << h << std::endl;
+        //std::cout << wallHit <<' '<< vx << ' ' << vy << ' ' << h << std::endl;
     }
 }
 
@@ -102,6 +100,8 @@ void BallisticMovement::printAreaOfLanding()
         }
     if (pointOfLanding > walls.at(walls.size() - 1).x)
         std::cout << std::to_string(walls.size() - 1) << std::endl;
+    if (pointOfLanding < 0)
+        std::cout << 0 << std::endl;
 }
 
 BallisticMovement::~BallisticMovement() {}

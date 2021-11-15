@@ -25,7 +25,7 @@ private:
     bool flyRight;
     bool collided;
 
-    double wallHit;
+    int wallHit;
     int n;
     double pointOfLanding;
 
