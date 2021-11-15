@@ -15,7 +15,7 @@ struct Wall
 /* 3rd HW*/
 class BallisticMovement {
 private:
-    std::vector<Wall> walls;
+    //std::vector<Wall> walls;
     double vx;
     double vy;
     double h;
@@ -27,7 +27,7 @@ private:
 
     int wallHit;
     int n;
-    double pointOfLanding;
+
 
     void readFile(const char*);
     static double* roots(double, double, double, double);
@@ -38,6 +38,8 @@ private:
     void solution();
 
 public:
+    std::vector<Wall> walls;
+    double pointOfLanding;
     BallisticMovement(const char*);
     void printAreaOfLanding();
     ~BallisticMovement();
