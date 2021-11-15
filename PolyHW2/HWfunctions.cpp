@@ -34,14 +34,15 @@ double BallisticMovement::flyPath(double x)
     return h + (x - walls.at(wallHit).x) * tan - (g * (x- walls.at(wallHit).x) * (x- walls.at(wallHit).x)) / (2 * v02) * (tan * tan + 1);
 }
 
-double* BallisticMovement::roots(double a, double b, double c, double move)
+std::vector<double> BallisticMovement::roots(double a, double b, double c, double move)
 {
 
     double dis = sqrt(b*b - 4*a*c);
     double x1 = (-b - dis) / (2*a);
     double x2 = (-b + dis) / (2*a);
 
-    double ar[2]{ x1 + move, x2 + move };
+    std::vector<double> ar{ x1 + move, x2 + move };
+    
     return ar;
 }
 

@@ -32,7 +32,7 @@ private:
 
 
     void readFile(const char*);
-    static double* roots(double, double, double, double);
+    static std::vector<double> roots(double, double, double, double);
     double flyPath(double x);
     void checkCollision(int i);
     void landing();
