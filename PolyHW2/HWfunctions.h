@@ -36,7 +36,7 @@ private:
     double flyPath(double x);
     void checkCollision(int i);
     void landing();
-    static bool comp(Wall&, Wall&);
+
     void solution();
 
 public:
