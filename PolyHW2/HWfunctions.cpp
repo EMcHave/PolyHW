@@ -11,23 +11,16 @@ BallisticMovement::BallisticMovement(char* inputFile)
 
 void BallisticMovement::readFile(char* path)
 {
-
     std::ifstream in(path);
-    if (in.is_open())
-    {
-        in >> h;
-        in >> vx >> vy;
+    in >> h;
+    in >> vx >> vy;
 
-        walls.push_back(Wall{ 0, h });
-        while (!in.eof())
-        {
-            Wall inWall;
-            in >> inWall.x >> inWall.h;
-            walls.push_back(inWall);
-        }
-    }
-    else {
-        throw std::runtime_error("No file!");
+    walls.push_back(Wall{ 0, h });
+    while (!in.eof())
+    {
+        Wall inWall;
+        in >> inWall.x >> inWall.h;
+        walls.push_back(inWall);
     }
 }
 
@@ -55,30 +48,27 @@ void BallisticMovement::solution()
 {
     while (!isLanded)
     {
-
         if (flyRight) {
             for (int i = wallHit + 1; i < walls.size(); i++)
                 if (!collided)
-                    flight(i);
+                    checkCollision(i);
         }
         else {
             for (int i = wallHit - 1; i >= 1; i--)
                 if (!collided)
-                    flight(i);
+                    checkCollision(i);
         }
-        if (!collided)
-            landing();
+        if (!collided) landing();
         else collided = false;
     }
 }
 
-void BallisticMovement::flight(int i)
+void BallisticMovement::checkCollision(int i)
 {
     double temp = flyPath(walls[i].x);
     //std::cout << temp << std::endl;
     if (temp < walls[i].h && temp > 0)
     {
-        
         collided = true;
         flyRight = !flyRight;
         h = temp;
