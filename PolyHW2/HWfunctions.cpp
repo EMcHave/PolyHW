@@ -1,5 +1,5 @@
 #include "HWfunctions.h"
-#include <string>
+#include <algorithm>
 ////////////////////// 3RD HW ///////////////////////
 
 BallisticMovement::BallisticMovement(const char* inputFile)
@@ -22,6 +22,7 @@ void BallisticMovement::readFile(const char* path)
         in >> inWall.x >> inWall.h;
         walls.push_back(inWall);
     }
+    std::sort(walls.begin(), walls.end(), comp);
 }
 
 
@@ -96,15 +97,17 @@ void BallisticMovement::printAreaOfLanding()
     for (int i = 0; i < walls.size() - 1; i++)
         if (pointOfLanding > walls[i].x && pointOfLanding < walls[i + 1].x)
         {
-            std::cout << std::to_string(i) << std::endl;
+            std::cout << i << std::endl;
         }
     if (pointOfLanding > walls.at(walls.size() - 1).x)
-        std::cout << std::to_string(walls.size() - 1) << std::endl;
+        std::cout << walls.size() - 1 << std::endl;
     if (pointOfLanding < 0)
         std::cout << 0 << std::endl;
 }
 
 BallisticMovement::~BallisticMovement() {}
 
-
-
+bool BallisticMovement::comp(Wall& w1, Wall& w2)
+{
+    return w1.x < w2.x;
+}
