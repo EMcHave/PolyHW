@@ -26,7 +26,6 @@ private:
     bool collided;
 
     int wallHit;
-    int n;
     
     double pointOfLanding;
 

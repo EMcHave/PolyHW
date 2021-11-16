@@ -69,7 +69,7 @@ void BallisticMovement::solution()
 void BallisticMovement::checkCollision(int i)
 {
     double temp = flyPath(walls[i].x);
-    if (temp < walls[i].h && temp > 0)
+    if (temp <= walls[i].h && temp > 0)
     {
         collided = true;
         flyRight = !flyRight;
@@ -96,14 +96,14 @@ void BallisticMovement::landing()
 void BallisticMovement::printAreaOfLanding()
 {
     //std::cout << pointOfLanding << std::endl;
-    for (int i = 0; i < walls.size() - 1; i++)
+    for (size_t i = 0; i < walls.size() - 1; i++)
         if (pointOfLanding > walls[i].x && pointOfLanding < walls[i + 1].x)
         {
             std::cout << i << std::endl;
         }
     if (pointOfLanding > walls.at(walls.size() - 1).x)
         std::cout << walls.size() - 1 << std::endl;
-    if (pointOfLanding <= 0)
+    else if (pointOfLanding <= 0)
         std::cout << 0 << std::endl;
 }
 
