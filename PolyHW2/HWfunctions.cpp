@@ -95,7 +95,7 @@ void BallisticMovement::landing()
 
 void BallisticMovement::printAreaOfLanding()
 {
-    std::cout << pointOfLanding << std::endl;
+    //std::cout << pointOfLanding << std::endl;
     for (int i = 0; i < walls.size() - 1; i++)
         if (pointOfLanding > walls[i].x && pointOfLanding < walls[i + 1].x)
         {
