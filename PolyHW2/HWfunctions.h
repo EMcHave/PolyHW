@@ -25,20 +25,23 @@ private:
     bool flyRight;
     bool collided;
 
-    double wallHit;
+    int wallHit;
     int n;
+    
     double pointOfLanding;
 
-    void readFile(char*);
-    static double* roots(double, double, double, double);
+
+    void readFile(const char*);
+    static std::vector<double> roots(double, double, double, double);
     double flyPath(double x);
-    void flight(int i);
+    void checkCollision(int i);
     void landing();
 
     void solution();
 
 public:
-    BallisticMovement(char*);
+
+    BallisticMovement(const char*);
     void printAreaOfLanding();
     ~BallisticMovement();
 };
