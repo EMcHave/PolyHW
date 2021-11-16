@@ -103,7 +103,7 @@ void BallisticMovement::printAreaOfLanding()
         }
     if (pointOfLanding > walls.at(walls.size() - 1).x)
         std::cout << walls.size() - 1 << std::endl;
-    if (pointOfLanding < 0)
+    if (pointOfLanding <= 0)
         std::cout << 0 << std::endl;
 }
 

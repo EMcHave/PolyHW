@@ -6,8 +6,9 @@ int main(int argc, char** argv)
 {
     if (argc == 2)
     {
-        BallisticMovement solution(argv[1]);
-        solution.printAreaOfLanding();
+        BallisticMovement* solution = new BallisticMovement(argv[1]);
+        solution->printAreaOfLanding();
+        delete solution;
         return 0;
     }
     else {
