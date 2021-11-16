@@ -69,7 +69,7 @@ void BallisticMovement::solution()
 void BallisticMovement::checkCollision(int i)
 {
     double temp = flyPath(walls[i].x);
-    if (temp <= walls[i].h && temp > 0)
+    if (temp <= walls[i].h && temp >= 0)
     {
         collided = true;
         flyRight = !flyRight;
@@ -89,7 +89,6 @@ void BallisticMovement::landing()
     int root;
     if (flyRight) root = 0;
     else root = 1;
-
     pointOfLanding = roots(-g / (2 * v0) * (tan * tan + 1), tan, h, walls[wallHit].x)[root];
 }
 

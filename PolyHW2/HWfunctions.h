@@ -29,7 +29,6 @@ private:
     
     double pointOfLanding;
 
-
     void readFile(const char*);
     static std::vector<double> roots(double, double, double, double);
     double flyPath(double x);
