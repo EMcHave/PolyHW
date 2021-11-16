@@ -23,7 +23,7 @@ void BallisticMovement::readFile(const char* path)
         in >> inWall.x >> inWall.h;
         walls.push_back(inWall);
     }
-    std::sort(walls.begin(), walls.end(), [](Wall& w1, Wall& w2) {return w1.x < w2.x; });
+    //std::sort(walls.begin(), walls.end(), [](Wall& w1, Wall& w2) {return w1.x < w2.x; });
 }
 
 
@@ -103,7 +103,7 @@ void BallisticMovement::printAreaOfLanding()
         }
     if (pointOfLanding > walls.at(walls.size() - 1).x)
         std::cout << walls.size() - 1 << std::endl;
-    if (pointOfLanding < 0)
+    if (pointOfLanding <= 0)
         std::cout << 0 << std::endl;
 }
 
