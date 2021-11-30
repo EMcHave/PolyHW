@@ -17,10 +17,10 @@ void BallisticMovement::readFile(const char* path)
     in >> vx >> vy;
 
     walls.push_back(Wall{ 0, 0 });
-    while (!in.eof())
+    double x, h;
+    while (in >> x >> h)
     {
-        Wall inWall;
-        in >> inWall.x >> inWall.h;
+        Wall inWall{ x, h };
         walls.push_back(inWall);
     }
     //std::sort(walls.begin(), walls.end(), [](Wall& w1, Wall& w2) {return w1.x < w2.x; });
