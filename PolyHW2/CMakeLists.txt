@@ -1,5 +1,4 @@
-﻿
-cmake_minimum_required (VERSION 3.8)
+﻿cmake_minimum_required (VERSION 3.8)
 
 add_executable (homework2  "PolyHW.cpp" "HWfunctions.cpp")
 
