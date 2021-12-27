@@ -6,7 +6,9 @@
 
 
 int main()
-{/*
+{
+    vector<Simplex*> polygons;
+    /*
     stringstream ss;
     string line = "";
     getline(cin, line, '\n');
@@ -15,23 +17,24 @@ int main()
         if (line == "RECTANGLE")
         {
             getline(cin, line, '\n');
-            point p1, p2;
+            float f1, f2, f3, f4;
             ss << line << endl;
-            ss >> p1.x >> p1.y;
+            ss >> f1 >> f2;
             getline(cin, line, '\n');
             ss << line << std::endl;
-            ss >> p2.x >> p2.y;
+            ss >> f3 >> f4;
+            polygons.push_back(new Rect(f1, f2, f3, f4));
             getline(cin, line, '\n');
         }
         else if (line == "CIRCLE")
         {
-            circle c;
-            cin >> c.r;
+            float r, cx, cy;
+            cin >> r;
             cin.ignore(10, '\n');
             getline(cin, line, '\n');
             ss << line << endl;
-            ss >> c.x >> c.y;
-            cout << c.r << ' ' << c.y << ' ' << c.x << endl;
+            ss >> cx >> cy;
+            polygons.push_back(new Circle(r, cx, cy));
             getline(cin, line, '\n');
         }
         else if (line == "POLYGON")
@@ -45,21 +48,25 @@ int main()
                 ss >> n1 >> n2;
                 v.push_back(n1);
                 v.push_back(n2);
-                getline(cin, line, '\n');
+                getline(cin, line, '\n');              
             }
+            polygons.push_back(new Polygon(v));
         }
     }
     */
-    vector<Simplex*> polygons;
-    //polygons.push_back(new Polygon(vector<float>{-15, 4, -10, 5, -1, 3, -3, -2, -7, -6, -13, -3}));
+    polygons.push_back(new Polygon(vector<float>{-15, 4, -10, 5, -1, 3, -3, -2, -7, -6, -13, 3}));
     polygons.push_back(new Circle(3, 0, 4));
     polygons.push_back(new Rect(2, 8, 13, 0.5));
+    polygons.push_back(new Polygon(vector<float>{-3, 5, -3, 8, 4, 9}));
+    polygons.push_back(new Circle(1, -1, 1));
+    polygons.push_back(new Rect(1, -1, 5, -5));
 
 
 
-    bool i = Simplex::intersects(new Circle(3, 0, 4), new Rect(6, 8, 13, 0.5));
-
-    cout << i << endl;
-
+    for (size_t i = 0; i < polygons.size(); i++)
+        for (size_t j = 0; j < polygons.size(); j++)
+            if (i != j)
+                if (Simplex::intersects(polygons[i], polygons[j]))
+                    cout << i << ' ' << j << endl;
     return 0;
 }

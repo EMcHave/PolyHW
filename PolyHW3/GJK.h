@@ -2,6 +2,7 @@
 #include <vector>
 #include <cmath>
 #include <limits>
+#include <initializer_list>
 #include "vector3.h"
 
 using namespace std;
@@ -32,7 +33,7 @@ protected:
 	vector<vector3> vertices;
 public:
 	Polygon();
-	Polygon(vector<float>& points);
+	Polygon(vector<float>&);
 	virtual vector3 furthestPoint(const vector3&) const override;
 	~Polygon();
 };

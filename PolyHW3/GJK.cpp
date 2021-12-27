@@ -1,22 +1,22 @@
 #include "GJK.h"
 #include <iostream>
+#include <limits>
 
 
 bool Simplex::intersects(const Simplex* s1,const Simplex* s2)
 {
 	vector3 d = vector3(0, 1);
-	cout << d << endl;
 	vector<vector3> simplex;
 	simplex.push_back(support(s1, s2, d));
-	d = vector3::origin() - simplex.at(0);
+	d = (vector3::origin() - simplex.at(0)).norm();
 	while (true)
 	{
-		cout << d << endl;
 		vector3 A = support(s1, s2, d);
-		cout << A << endl;
-		if (vector3::dot(A, d) < 0) return false;
+		if (vector3::dot(A, d) <= 0) 
+			return false;
 		simplex.push_back(A);
-		if (Simplex::handleSimplex(simplex, d)) return true;
+		if (handleSimplex(simplex, d)) 
+			return true;
 	}
 }
 
@@ -27,7 +27,8 @@ vector3 Simplex::support(const Simplex* s1, const Simplex* s2, vector3& d)
 
 bool Simplex::handleSimplex(vector<vector3>& simplex, vector3& d)
 {
-	if (simplex.size() == 2) return Simplex::lineCase(simplex, d);
+	if (simplex.size() == 2) 
+		return lineCase(simplex, d);
 	return triangleCase(simplex, d);
 }
 
@@ -38,10 +39,8 @@ bool Simplex::lineCase(vector<vector3>& simplex, vector3& d)
 	vector3 AB = B - A;
 	vector3 AO = vector3::origin() - A;
 	vector3 ABperp = vector3::tripleProd(AB, AO, AB);
-	d = ABperp; 
-	d.norm();
+	d = ABperp.norm();
 	return false;
-
 }
 
 bool Simplex::triangleCase(vector<vector3>& simplex, vector3& d)
@@ -49,18 +48,19 @@ bool Simplex::triangleCase(vector<vector3>& simplex, vector3& d)
 	vector3 C, B, A, AB, AC, AO, ABperp, ACperp;
 
 	C = simplex.at(0); B = simplex.at(1); A = simplex.at(2);
-	cout << C << '\n' << B << '\n' << A << endl;
 	AB = B - A; AC = C - A; AO = vector3::origin() - A;
 	ABperp = vector3::tripleProd(AC, AB, AB);
 	ACperp = vector3::tripleProd(AB, AC, AC);
 	if (vector3::dot(ABperp, AO) > 0)
 	{
 		simplex.erase(simplex.begin());
+		d = ABperp.norm();
 		return false;
 	}
 	else if (vector3::dot(ACperp, AO) > 0)
 	{
 		simplex.erase(simplex.begin() + 1);
+		d = ACperp.norm();
 		return false;
 	}
 	return true;
@@ -72,7 +72,7 @@ Circle::Circle(float r, float cx, float cy) : r(r), center(cx, cy) {}
 
 vector3 Circle::furthestPoint(const vector3& d) const
 {
-	float angle = atan2f(d[0], d[1]);
+	float angle = atan2f(d[1], d[0]);
 
 	return vector3(center[0] + r*cosf(angle), center[1] + r*sinf(angle));
 }
@@ -82,10 +82,11 @@ Circle::~Circle() {}
 
 Polygon::Polygon() {}
 
-Polygon::Polygon(vector<float>& points)
+Polygon::Polygon(vector<float>& list)
 {
-	for (size_t i = 0; i < points.size(); i++)
-		vertices.at(i) = vector3(points[i++], points[i--]);
+	vector<float>::iterator it = list.begin();
+	for ( it; it!=list.end(); it++)
+		vertices.push_back(vector3(*it++, *(it+1)));
 }
 
 Rect::Rect(float ax, float ay, float bx, float by)
@@ -100,7 +101,7 @@ Rect::Rect(float ax, float ay, float bx, float by)
 
 vector3 Polygon::furthestPoint(const vector3& d) const
 {
-	float furthestDistance = -numeric_limits<float>::infinity();
+	float furthestDistance = -FLT_MAX;
 	vector3 furthestPoint(0, 0, 0);
 	for (vector3 v : vertices)
 	{
