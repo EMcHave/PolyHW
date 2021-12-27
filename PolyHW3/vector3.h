@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <cmath>
+#include <ostream>
 
 using namespace std;
 
@@ -14,7 +15,8 @@ public:
 	vector3(const vector3&);
 	vector3 operator= (vector3&);
 	void norm();
-	static float dot(vector3&, vector3&);
+	vector3 invert() { return vector3::origin() - *this; }
+	static float dot(const vector3&, const vector3&);
 	static vector3 vectorProd(vector3&, vector3&);
 	static vector3 tripleProd(vector3&, vector3&, vector3&);
 
@@ -22,4 +24,5 @@ public:
 	const float& operator[] (const int) const;
 	vector3 operator+ (vector3&);
 	vector3 operator- (vector3&);
+	friend ostream& operator << (ostream&, const vector3);
 };

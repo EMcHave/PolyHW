@@ -4,7 +4,6 @@ vector3::vector3() {};
 
 vector3::vector3(float x1, float x2, float x3)
 {
-	C = vector<float>(3);
 	C.push_back(x1);
 	C.push_back(x2);
 	C.push_back(x3);
@@ -29,7 +28,7 @@ void vector3::norm()
 		C.at(1) /= norm;
 }
 
-float vector3::dot(vector3& v1, vector3& v2)
+float vector3::dot(const vector3& v1, const vector3& v2)
 {
 	return v1[0] * v2[0] + v1[1] * v2[1] + v1[2] * v2[2];
 }
@@ -58,4 +57,10 @@ vector3 vector3::operator+(vector3& v)
 vector3 vector3::operator-(vector3& v)
 {
 	return vector3(C.at(0) - v[0], C.at(1) - v[1], C.at(2) - v[2]);
+}
+
+ostream& operator<<(ostream& out, const vector3 v)
+{
+	out << v[0] << ' ' << v[1] << ' ' << v[2] << endl;
+	return out;
 }

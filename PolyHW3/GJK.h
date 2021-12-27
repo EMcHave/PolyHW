@@ -20,40 +20,39 @@ private:
 	static bool lineCase(vector<vector3>&, vector3&);
 	static bool triangleCase(vector<vector3>&, vector3&);
 public:
-	static bool intersects(Simplex&,Simplex&);
-	static vector3 support(const Simplex&, const Simplex&, const vector3&);
-	virtual vector3 furthestPoint(vector3& d) = 0;
+	static bool intersects(const Simplex*, const Simplex*);
+	static vector3 support(const Simplex*, const Simplex*, vector3&);
+	virtual vector3 furthestPoint(const vector3& d) const = 0;
 	virtual ~Simplex();
 };
 
 class Polygon : public Simplex
 {
-private:
-	vector<point> vertices;
+protected:
+	vector<vector3> vertices;
 public:
 	Polygon();
-	vector3 furthestPoint(vector3&) override;
+	Polygon(vector<float>& points);
+	virtual vector3 furthestPoint(const vector3&) const override;
 	~Polygon();
 };
 
 class Circle : public Simplex
 {
 private:
-	float r;
-	point center;
+
 public:
+	float r;
+	vector3 center;
 	Circle(float r, float cx, float cy);
-	vector3 furthestPoint(vector3&) override;
+	virtual vector3 furthestPoint(const vector3&) const override;
 	~Circle();
 };
 
-class Rect : public Simplex
+class Rect : public Polygon
 {
-private:
-	vector<point> vertices;
 public:
 	Rect(float ax, float ay, float bx, float by);
-	vector3 furthestPoint(vector3&) override;
 	~Rect();
 };
 
