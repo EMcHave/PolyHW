@@ -2,13 +2,23 @@
 #include <sstream>
 #include <string>
 #include <vector> 
+#include <utility>
+#include <set>
 #include "GJK.h"
 
+using namespace Geometry;
 
 int main()
 {
-    vector<Simplex*> polygons;
-    /*
+    vector<Figure*> polygons;
+
+    polygons.push_back(new Polygon(vector<float>{-15, 4, -10, 5, -1, 3, -3, -2, -7, -6, -13, 3}));
+    polygons.push_back(new Circle(3, 0, 4));
+    polygons.push_back(new Rect(2, 8, 13, 0.5));
+    polygons.push_back(new Polygon(vector<float>{-3, 5, -3, 8, 4, 9}));
+    polygons.push_back(new Circle(1, -1, 1));
+    polygons.push_back(new Rect(1, -1, 5, -5));
+    
     stringstream ss;
     string line = "";
     getline(cin, line, '\n');
@@ -53,20 +63,23 @@ int main()
             polygons.push_back(new Polygon(v));
         }
     }
-    */
-    polygons.push_back(new Polygon(vector<float>{-15, 4, -10, 5, -1, 3, -3, -2, -7, -6, -13, 3}));
-    polygons.push_back(new Circle(3, 0, 4));
-    polygons.push_back(new Rect(2, 8, 13, 0.5));
-    polygons.push_back(new Polygon(vector<float>{-3, 5, -3, 8, 4, 9}));
-    polygons.push_back(new Circle(1, -1, 1));
-    polygons.push_back(new Rect(1, -1, 5, -5));
 
-
+    set<pair<int, int>> intersected;
 
     for (size_t i = 0; i < polygons.size(); i++)
         for (size_t j = 0; j < polygons.size(); j++)
             if (i != j)
-                if (Simplex::intersects(polygons[i], polygons[j]))
-                    cout << i << ' ' << j << endl;
+                if (Figure::intersects(polygons[i], polygons[j]))
+                    if (i < j)
+                        intersected.insert(pair<int, int>(i, j));
+                    else 
+                        intersected.insert(pair<int, int>(j, i));
+
+    for (pair<int, int> p : intersected)
+        cout << p.first << ' ' << p.second << endl;
+
+    for (Figure* s : polygons)
+        delete s;
+
     return 0;
 }

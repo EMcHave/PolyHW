@@ -31,13 +31,13 @@ float vector3::dot(const vector3& v1, const vector3& v2)
 	return v1[0] * v2[0] + v1[1] * v2[1] + v1[2] * v2[2];
 }
 
-vector3 vector3::vectorProd(vector3& v1, vector3& v2)
+vector3 vector3::vectorProd(const vector3& v1,const vector3& v2)
 {
 	return vector3(v1[1] * v2[2] - v1[2] * v2[1],
 		v1[2] * v2[0] - v1[0] * v2[2],
 		v1[0] * v2[1] - v1[1] * v2[0]);
 }
-vector3 vector3::tripleProd(vector3& v1, vector3& v2, vector3& v3)
+vector3 vector3::tripleProd(const vector3& v1, const vector3& v2, const vector3& v3)
 {
 	return vectorProd(vectorProd(v1, v2), v3);
 }
